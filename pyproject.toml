@@ -1,0 +1,64 @@
+[project]
+name = "pyramid-rollers"
+version = "0.1.0"
+description = "Helpers to build & document Web Services with Pyramid."
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+    "Framework :: Pylons",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+]
+keywords = ["web", "pyramid", "pylons", "rest", "api"]
+dependencies = [
+    "pyramid>=1.7,<3",
+]
+
+[project.urls]
+Repository = "https://github.com/tomascorrea/pyramid-rollers"
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest<9",
+    "pytest-cache<2",
+    "pytest-cov<7",
+    "WebTest<4",
+    "marshmallow>=3.13",
+]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.coverage.run]
+relative_files = true
+
+[tool.ruff]
+line-length = 99
+extend-exclude = [
+    "__pycache__",
+    ".venv/",
+]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E", "W",
+    # flake8
+    "F",
+    # isort
+    "I",
+]
+ignore = [
+    # `format` will wrap lines.
+    "E501",
+]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
