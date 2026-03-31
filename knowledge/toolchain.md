@@ -30,7 +30,26 @@ Defined in `noxfile.py`. Two parametrized sessions:
 
 Both sessions install the package from source plus shared test dependencies (`pytest`, `pytest-cache`, `pytest-cov`, `WebTest`).
 
+## CI / CD
+
+Two GitHub Actions workflows in `.github/workflows/`:
+
+### `ci.yml` — Continuous Integration
+
+- **Triggers:** push to `main`, pull requests to `main`.
+- **Lint job:** installs uv, runs `uv run ruff check .`.
+- **Test job:** matrix over Python 3.10, 3.11, 3.12, 3.13. Each runs `uv run nox` (which exercises both marshmallow 3 and marshmallow 4 sessions).
+
+### `publish.yml` — Publish to PyPI
+
+- **Trigger:** GitHub release published.
+- Uses **PyPI Trusted Publishing** (OIDC) via `pypa/gh-action-pypi-publish`. No API token secrets needed.
+- Requires a GitHub environment named `pypi` and a matching trusted publisher configured on PyPI (owner: `tomascorrea`, repo: `pyramid-rollers`, workflow: `publish.yml`, environment: `pypi`).
+- Builds sdist + wheel with `python -m build`, then publishes.
+
 ## Key Learnings / Gotchas
 
 - `uv sync --dev` installs `[dependency-groups] dev`, **not** `[project.optional-dependencies] dev`. These are different PEP standards.
 - `uv.lock` must be committed — it pins the full resolution graph for reproducible installs.
+- The publish workflow uses `actions/setup-python` (not `astral-sh/setup-uv`) because it only needs `pip install build` and `python -m build` — no uv-specific features required.
+- Trusted publishing requires both the GitHub environment (`pypi`) and the PyPI publisher config to be set up before the first release.
