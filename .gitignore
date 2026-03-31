@@ -4,7 +4,7 @@ __pycache__/
 *.egg
 dist/
 build/
-.tox/
+.nox/
 .pytest_cache/
 .coverage
 *.so

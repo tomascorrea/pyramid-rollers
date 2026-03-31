@@ -22,7 +22,7 @@ dependencies = [
 [project.urls]
 Repository = "https://github.com/tomascorrea/pyramid-rollers"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "ruff",
     "pytest<9",
@@ -30,6 +30,7 @@ dev = [
     "pytest-cov<7",
     "WebTest<4",
     "marshmallow>=3.13",
+    "nox",
 ]
 
 [build-system]
