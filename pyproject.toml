@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Helpers to build & document Web Services with Pyramid."
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
